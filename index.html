@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Mapas</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="css/bootstrap-switch.css" rel="stylesheet">
+
+
+</head>
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top">
+        <div id="elem_nav">
+        	<a >Localizacón</a>
+        	<input type="checkbox" name="my-checkbox" id="my-checkbox" onchange="geoSwitch()">
+            <a>Clave de grupo</a>
+            <input type="text" name"clave_grupo" id="clave_grupo">
+            <input type="button" name="my-button" id="actualizar" value="Actualizar" onclick="update()">
+            <a>Generar clave</a>
+            <input type="text" name"gen_clave" id="gen_clave">
+            <input type="button" name="generar" id="generar" value="Generar" onclick="generar()">
+            <a>Usuario</a>
+            <input type="text" name"nom_usuario" id="nom_usuario">
+        </div> 
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Opciones <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Nuevo</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">One more separated link</a></li>
+                </ul>
+            </li>
+        </ul>
+	</nav>
+	<div id="componentes">
+		<div id="map" col-lg-12></div>
+	</div>
+	
+
+	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> 
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>	
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/pouchdb-3.5.0.min.js"></script>
+    <script src="js/requiere.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/json2/20140204/json2.js"></script>
+	<script src="js/geo.js"></script>
+</body>
+</html>

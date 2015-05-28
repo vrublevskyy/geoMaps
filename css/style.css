@@ -1,0 +1,10 @@
+#map {
+	 height: 900px;
+}
+body { padding-top: 51px; }
+
+#elem_nav{
+	position: absolute;
+	top: 15px;
+	left: 10px;
+}
