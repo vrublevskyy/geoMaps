@@ -14,9 +14,10 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 
 
 $(document).ready(function () {
-	$.fn.bootstrapSwitch.defaults.size = 'mini';
-	$("[name='my-checkbox']").bootstrapSwitch();
-	setInterval('update()', 1000);
+
+     $.getJSON('http://nominatim.openstreetmap.org/search?format=json&limit=5&q=' + "lviv", function(data) {
+        console.log(data);
+     });
     
 });
 
@@ -49,27 +50,18 @@ function markMe(position)
     var grupo = null;
     var user = null;
     var existe = false;
-
-    db.get(document.getElementById('clave_grupo').value).then(function (doc) {
-        grupo = doc;    
-            user = {
-                "usuario": document.getElementById('nom_usuario').value,
+    markerMe={
                 "type": "Feature",
-                "properties": {
-                },
+                "properties": {},
                 "geometry": {
                     "type": "Point",
                     "coordinates": [
-                    position.coords.latitude,
-                    position.coords.longitude
-                    ]
+                        position.coords.latitude,
+                        position.coords.longitude]
                 }
             }
-            console.log(grupo);
-            grupo.conectados.push(user);
-            db.put(grupo);
-        
-    });
+
+  
     map.setView([position.coords.latitude, position.coords.longitude], 16);
 }
 
@@ -92,7 +84,6 @@ function showError(error)
 
 function geoMe()
 {
-    console.log("hola");
 	if (map !== null)
 	{
 		 if (navigator.geolocation)
@@ -135,19 +126,33 @@ function update() {
 
 }
 
-function updateMe(){
-    var id=setInterval('geoMe()', 1000);
+function searchText(){
+    var response;
+    var mark;
 
-    return id;
+     $.getJSON('http://nominatim.openstreetmap.org/search?format=json&limit=5&q=' + document.getElementById('place').value, function(data) {
+        for (var i = data.length-1; i>=0; i--) {
+         mark={
+            "type": data[i].display_name,
+            "properties": {},
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    data[i].lat,
+                    data[i].lon]
+                }
+            }
+            console.log(mark)
+            L.marker([mark.geometry.coordinates[0], mark.geometry.coordinates[1]]).addTo(map)
+            .bindPopup(mark.type)
+            .openPopup();
+         };    
+     });
+
+
+    
+
+    
 }
 
-function generar() {
-    var clave = document.getElementById('gen_clave').value;
-    var grupo = {
-        "_id": clave,
-        "conectados": []
-    }
 
-    db.put(grupo);
-
-}
