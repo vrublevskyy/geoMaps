@@ -145,8 +145,8 @@ $("#search").on("click", function(e) {
                 }
             }
             numRow=i+1;
-            row="<th scope=\"row\">"+numRow+"</th>"+"<td>"+"C1"+"</td>"+"<td>"+data[i].display_name+"</td>"+"<td>"+data[i].importance+"</td>"
-            newRow=newRow+"<tr id=\""+data[i].lat+","+data[i].lon+"\">"+row+"</tr>";
+            row="<th scope=\"row\">"+numRow+"</th>"+"<td>"+data[i].display_name+"</td>"+"<td>"+data[i].importance+"</td>"
+            newRow=newRow+"<tr id=\""+data[i].lat+","+data[i].lon+"\" onclick=\"setMyView("+data[i].lat+","+data[i].lon+")\">"+row+"</tr>";
             
             console.log(mark)
             L.marker([mark.geometry.coordinates[0], mark.geometry.coordinates[1]]).addTo(map)
@@ -154,10 +154,15 @@ $("#search").on("click", function(e) {
             .openPopup();
 
          }; 
-         newRow=newRow+newRow;
          document.getElementById('tBody').innerHTML = newRow;  
      });
 });
 
+function setMyView(lon,lat){
+    map.setView([lon, lat], 16);
+}
 
+function setLayout(tipo){
+
+}
 

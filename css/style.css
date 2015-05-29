@@ -6,11 +6,20 @@ html, body
     height: 100%;
 }
 table{
- height:900px; 
- width: 100%;
+ 	height:900px; 
 }
 #tBody{
-  overflow-y: scroll;
-  position: absolute;
+	height:800px; 
+  	overflow-y: scroll;
+  	position: absolute;
+}
+td a
+{
+    display: block;
+    height: 40px;
+    line-height: 40px;
+}
+#leftTable{
+	height:900px; 
 }
 
