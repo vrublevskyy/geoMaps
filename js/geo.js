@@ -14,10 +14,8 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 
 
 $(document).ready(function () {
+    console.log( $.getJSON('http://nominatim.openstreetmap.org/search?format=json&limit=20&q=' + "lviv",null));
 
-     $.getJSON('http://nominatim.openstreetmap.org/search?format=json&limit=5&q=' + "lviv", function(data) {
-        console.log(data);
-     });
     
 });
 
@@ -126,12 +124,16 @@ function update() {
 
 }
 
-function searchText(){
+$("#search").on("click", function(e) {
+    e.preventDefault();
     var response;
     var mark;
 
-     $.getJSON('http://nominatim.openstreetmap.org/search?format=json&limit=5&q=' + document.getElementById('place').value, function(data) {
-        for (var i = data.length-1; i>=0; i--) {
+     $.getJSON('http://nominatim.openstreetmap.org/search?format=json&limit=20&q=' + document.getElementById('place').value, function(data) {
+        var newRow;
+        var row;
+        var numRow;
+        for (var i =0; i<data.length; i++) {
          mark={
             "type": data[i].display_name,
             "properties": {},
@@ -142,17 +144,20 @@ function searchText(){
                     data[i].lon]
                 }
             }
+            numRow=i+1;
+            row="<th scope=\"row\">"+numRow+"</th>"+"<td>"+"C1"+"</td>"+"<td>"+data[i].display_name+"</td>"+"<td>"+data[i].importance+"</td>"
+            newRow=newRow+"<tr id=\""+data[i].lat+","+data[i].lon+"\">"+row+"</tr>";
+            
             console.log(mark)
             L.marker([mark.geometry.coordinates[0], mark.geometry.coordinates[1]]).addTo(map)
             .bindPopup(mark.type)
             .openPopup();
-         };    
+
+         }; 
+         newRow=newRow+newRow;
+         document.getElementById('tBody').innerHTML = newRow;  
      });
+});
 
-
-    
-
-    
-}
 
 

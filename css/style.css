@@ -1,3 +1,16 @@
 #map {
 	 height: 900px;
 }
+html, body
+{
+    height: 100%;
+}
+table{
+ height:900px; 
+ width: 100%;
+}
+#tBody{
+  overflow-y: scroll;
+  position: absolute;
+}
+
